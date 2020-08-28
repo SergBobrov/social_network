@@ -12,6 +12,10 @@
     grid-gap: 10px;
 }
 
+.app-wrapper-content {
+    background-color: gainsboro;
+    grid-area: c;
+}
 
 
 

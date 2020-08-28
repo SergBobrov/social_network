@@ -2,6 +2,7 @@ import React from "react";
 import logo from "../../images/main-img.png";
 import classes from './MyPosts.module.css';
 import avatar from "../../../images/avatar.png"
+import {Post} from "./Post/Post";
 
 
 export const MyPosts = () => {
@@ -13,13 +14,8 @@ export const MyPosts = () => {
                 <button>Add post</button>
             </div>
             <div className={classes.post}>
-                <div className={classes.item}>
-                    <img src={avatar} alt=""/>
-                    post 1
-                </div>
-                <div className={classes.item}>
-                    post 2
-                </div>
+                <Post message='Hi, how a u?' likeCount={15}/>
+                <Post message="Its my first post" likeCount={10}/>
             </div>
         </div>
     );
