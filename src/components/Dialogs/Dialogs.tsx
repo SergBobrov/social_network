@@ -1,45 +1,45 @@
 import React from "react";
 import classes from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
+import {Message} from "./Message/Message";
 
 export type DialogsType = {
-    name: string
-    id: string
+    personsData: Array<{
+        id: number
+        name: string
+    }>,
+    messagesData: Array<{
+        id: number
+        text: string
+    }>
 }
 
-export const Dialogs = (props: any) => {
+export const Dialogs = (props: DialogsType) => {
+
+
+
     return (
         <div className={classes.dialogs}>
             <div className={classes.dialogItems}>
-                <DialogItem name="Dimych" id="1"/>
-                <DialogItem name="Sveta" id="2"/>
-                <DialogItem name="Valera" id="3"/>
-                <DialogItem name="Sasha" id="4"/>
-                <DialogItem name="Vlad" id="5"/>
-                <DialogItem name="Nansy" id="6"/>
+                {props.personsData.map((t) => {
+                    return (
+                        <DialogItem name={t.name} id={t.id} key={t.id}/>
+                    )
+                })}
 
 
             </div>
             <div className={classes.messages}>
-                <Message text="Hi"/>
-                <Message text="Hey"/>
-                <Message text="Wats up"/>
+                {props.messagesData.map((t) => {
+                        return (<Message text={t.text} key={t.id}/>)
+                    }
+                )}
+
             </div>
 
         </div>
     )
 };
 
-type MessageType = {
-    text: string
-}
-
-
-const Message = (props: MessageType) => {
-    return (
-        <div className={classes.message}>{props.text}</div>
-    )
-
-}
 
 

@@ -1,10 +1,7 @@
-.item {
-    color: darkblue;
+.postsBlock {
+    padding: 10px;
 }
 
-.item img {
-    width: 50px;
-    height: 50px;
-
+.post {
+    margin-top: 10px;
 }
-

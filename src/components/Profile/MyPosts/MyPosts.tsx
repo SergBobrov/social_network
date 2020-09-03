@@ -1,21 +1,36 @@
 import React from "react";
-import logo from "../../images/main-img.png";
 import classes from './MyPosts.module.css';
-import avatar from "../../../images/avatar.png"
 import {Post} from "./Post/Post";
 
 
-export const MyPosts = () => {
+type MyPostsPropsType = {
+    postsData: Array<{
+        id: number
+        text: string
+        likeCount: number
+    }>
+}
+
+export const MyPosts = (props: MyPostsPropsType) => {
+
+
     return (
-        <div>
-            My post
+        <div className={classes.postsBlock}>
+            <h3>My post</h3>
             <div>
-                <textarea></textarea>
-                <button>Add post</button>
+                <div>
+                    <textarea></textarea>
+                </div>
+                <div>
+                    <button>Add post</button>
+                </div>
             </div>
             <div className={classes.post}>
-                <Post message='Hi, how a u?' likeCount={15}/>
-                <Post message="Its my first post" likeCount={10}/>
+                {props.postsData.map((t) => {
+                    return (
+                        <Post message={t.text} likeCount={t.likeCount} key={t.id}/>
+                    )
+                })}
             </div>
         </div>
     );

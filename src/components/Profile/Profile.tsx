@@ -1,19 +1,24 @@
 import React from "react";
-import logo from "../../images/main-img.png";
 import classes from './Profile.module.css';
 import {MyPosts} from "./MyPosts/MyPosts";
+import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 
 
-export const Profile = () => {
+type ProfilePropsType = {
+    postsData: Array<{
+        id: number
+        text: string
+        likeCount: number
+    }>
+}
+
+
+export const Profile = (props: ProfilePropsType) => {
     return (
-        <div className={classes.content}>
-            <img
-                src={logo}
-                alt=""/>
-            <div>
-                ava+description
-            </div>
-            <MyPosts/>
+        <div>
+            <ProfileInfo/>
+            <MyPosts postsData={props.postsData} />
         </div>
     )
 };
+
