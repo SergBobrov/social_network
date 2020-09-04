@@ -16,5 +16,9 @@
 }
 
 .messages .message {
-    padding: 10px;
+    padding: 3px;
+}
+
+.path a{
+    text-decoration: none;
 }

@@ -15,9 +15,6 @@ export type DialogsType = {
 }
 
 export const Dialogs = (props: DialogsType) => {
-
-
-
     return (
         <div className={classes.dialogs}>
             <div className={classes.dialogItems}>
@@ -26,12 +23,12 @@ export const Dialogs = (props: DialogsType) => {
                         <DialogItem name={t.name} id={t.id} key={t.id}/>
                     )
                 })}
-
-
             </div>
+
             <div className={classes.messages}>
                 {props.messagesData.map((t) => {
-                        return (<Message text={t.text} key={t.id}/>)
+                        return (
+                            <Message text={t.text} key={t.id}/>)
                     }
                 )}
 
