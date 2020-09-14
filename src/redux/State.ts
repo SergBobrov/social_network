@@ -1,6 +1,9 @@
 import ava1 from '../images/avas/ava1.png'
 import ava2 from '../images/avas/ava2.png'
 import ava3 from '../images/avas/ava3.png'
+import {rerenderEntireTree} from "../render";
+
+
 
 
 type personsDataType = {
@@ -63,11 +66,17 @@ let state: RootStateType = {
     sideBar: {
         friends: [
             {id: 1, name: "Fernanda", img: {ava1}},
-            {id: 2, name: "Oskar", img: {ava1}},
-            {id: 3, name: "John", img: {ava1}}
+            {id: 2, name: "Oskar", img: {ava2}},
+            {id: 3, name: "John", img: {ava3}}
         ]
     }
 }
+
+export let addPost = (postMessage: string) => {
+    const post: postsDataType = {id: 3, text: postMessage, likeCount: 0}
+    state.profilePage.postsData.push(post);
+    rerenderEntireTree(state)
+};
 
 
 export default state;
