@@ -2,7 +2,6 @@ import React from "react";
 import classes from './Profile.module.css';
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {addPost} from "../../redux/State";
 
 
 type ProfilePropsType = {
@@ -11,7 +10,8 @@ type ProfilePropsType = {
         text: string
         likeCount: number
     }>
-    addPost: (s: string) => void
+    addPostToUI: () => void
+    addPostToState: (s: string) => void
 }
 
 
@@ -19,7 +19,7 @@ export const Profile = (props: ProfilePropsType) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts postsData={props.postsData} addPost={addPost}/>
+            <MyPosts postsData={props.postsData} addPostToUI={props.addPostToUI} addPostToState = {props.addPostToState}  />
         </div>
     )
 };

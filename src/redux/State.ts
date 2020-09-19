@@ -72,11 +72,15 @@ let state: RootStateType = {
     }
 }
 
-export let addPost = (postMessage: string) => {
-    const post: postsDataType = {id: 3, text: postMessage, likeCount: 0}
-    state.profilePage.postsData.push(post);
+export let addPostToUI = () => {
+
     rerenderEntireTree(state)
+
 };
 
+export let addPostToState = (postMessage: string) => {
+    const post: postsDataType = {id: 3, text: postMessage, likeCount: 0}
+    state.profilePage.postsData.push(post);
+};
 
 export default state;

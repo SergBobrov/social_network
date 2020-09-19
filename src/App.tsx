@@ -8,29 +8,14 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import {News} from "./components/News/News";
 import {Music} from './components/Music/Music';
 import {Settings} from './components/Settings/Settings';
-import {addPost, RootStateType} from './redux/State';
+import {RootStateType} from './redux/State';
 import { Friends } from './components/Friends/Friends';
 
 
-/*type AppPropsType = {
-    personsData: Array<{
-        id: number
-        name: string
-    }>,
-    messagesData: Array<{
-        id: number
-        text: string
-    }>,
-    postsData: Array<{
-        id: number
-        text: string
-        likeCount: number
-}
-    }>*/
-
 type AppType = {
     appState: RootStateType
-    addPost: (s: string) => void
+    addPostToUI: () => void
+    addPostToState: (s: string) => void
 }
 
 
@@ -41,7 +26,9 @@ const App = (props: AppType) => {
                 <Header/>
                 <Nav/>
                 <div className="app-wrapper-content">
-                    <Route path='/profile' render={() => <Profile postsData={props.appState.profilePage.postsData} addPost={addPost}/>}/>
+                    <Route path='/profile' render={() => <Profile postsData={props.appState.profilePage.postsData} addPostToUI={props.addPostToUI}
+                                                                  addPostToState = {props.addPostToState}
+                    />}/>
                     <Route path='/Dialogs' render={() => <Dialogs personsData={props.appState.dialogsPage.personsData}
                                                                   messagesData={props.appState.dialogsPage.messagesData}/>}/>
                     <Route path='/News' render={() => <News/>}/>

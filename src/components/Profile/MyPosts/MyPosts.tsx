@@ -1,7 +1,6 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import classes from './MyPosts.module.css';
 import {Post} from "./Post/Post";
-
 
 
 type MyPostsPropsType = {
@@ -9,8 +8,9 @@ type MyPostsPropsType = {
         id: number
         text: string
         likeCount: number
-            }>
-    addPost: (s: string) => void
+    }>
+    addPostToUI: () => void
+    addPostToState: (s: string) => void
 }
 
 export const MyPosts = (props: MyPostsPropsType) => {
@@ -21,25 +21,34 @@ export const MyPosts = (props: MyPostsPropsType) => {
         )
     });
 
-    let newPostElement = React.createRef<HTMLTextAreaElement>();
 
-    let addPost = () => {
-//        newPostElement.current && props.addPost(newPostElement.current.value);
-        if (newPostElement.current) {
-            props.addPost(newPostElement.current.value);
-            newPostElement.current.value = ""
+    const addPostToUI = () => {
+        props.addPostToUI();
+        if (textValueRef.current) {
+            textValueRef.current.value = "";
         }
     };
+
+    const addPostToState = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.addPostToState(e.currentTarget.value);
+    };
+
+    const textValueRef = React.createRef<HTMLTextAreaElement>();
 
     return (
         <div className={classes.postsBlock}>
             <h3>My post</h3>
             <div>
                 <div>
-                    <textarea ref={newPostElement}></textarea>
+                    <textarea ref={textValueRef}
+                              onChange={addPostToState}></textarea>
+
                 </div>
                 <div>
-                    <button onClick={addPost}>Add post</button>
+                    <button
+
+                        onClick={addPostToUI}>Add post
+                    </button>
                 </div>
             </div>
             <div className={classes.post}>
