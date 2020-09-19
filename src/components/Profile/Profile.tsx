@@ -10,8 +10,10 @@ type ProfilePropsType = {
         text: string
         likeCount: number
     }>
-    addPostToUI: () => void
-    addPostToState: (s: string) => void
+    addPost: () => void
+    newPostText: string
+    updateNewPostText: (s: string) => void
+
 }
 
 
@@ -19,7 +21,11 @@ export const Profile = (props: ProfilePropsType) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts postsData={props.postsData} addPostToUI={props.addPostToUI} addPostToState = {props.addPostToState}  />
+            <MyPosts postsData={props.postsData}
+                     addPost = {props.addPost}
+                     newPostText = {props.newPostText}
+                     updateNewPostText={props.updateNewPostText}
+            />
         </div>
     )
 };

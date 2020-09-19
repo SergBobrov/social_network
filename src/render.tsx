@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import {addPostToState, addPostToUI, RootStateType} from "./redux/State";
+import {addPost, RootStateType, updateNewPostText} from "./redux/State";
 
 
 
@@ -12,8 +12,8 @@ export let rerenderEntireTree = (state: RootStateType) => {
         <React.StrictMode>
             <App
                 appState = {state}
-                addPostToUI = {addPostToUI}
-                addPostToState = {addPostToState}
+                addPost = {addPost}
+                updateNewPostText = {updateNewPostText}
             />
 
 

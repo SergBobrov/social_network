@@ -9,9 +9,12 @@ type MyPostsPropsType = {
         text: string
         likeCount: number
     }>
-    addPostToUI: () => void
-    addPostToState: (s: string) => void
+    addPost: () => void
+    newPostText: string
+    updateNewPostText: (s: string) => void
+
 }
+
 
 export const MyPosts = (props: MyPostsPropsType) => {
 
@@ -22,32 +25,31 @@ export const MyPosts = (props: MyPostsPropsType) => {
     });
 
 
-    const addPostToUI = () => {
-        props.addPostToUI();
-        if (textValueRef.current) {
-            textValueRef.current.value = "";
-        }
+    const addPost = () => {
+        props.addPost()
     };
 
-    const addPostToState = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.addPostToState(e.currentTarget.value);
+    const onPostChane = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.updateNewPostText(e.currentTarget.value)
     };
 
-    const textValueRef = React.createRef<HTMLTextAreaElement>();
+
 
     return (
         <div className={classes.postsBlock}>
             <h3>My post</h3>
             <div>
                 <div>
-                    <textarea ref={textValueRef}
-                              onChange={addPostToState}></textarea>
+                    <textarea
+                              value={props.newPostText}
+                              onChange={onPostChane}
+                    ></textarea>
 
                 </div>
                 <div>
                     <button
 
-                        onClick={addPostToUI}>Add post
+                        onClick={addPost}>Add post
                     </button>
                 </div>
             </div>

@@ -3,9 +3,6 @@ import ava2 from '../images/avas/ava2.png'
 import ava3 from '../images/avas/ava3.png'
 import {rerenderEntireTree} from "../render";
 
-
-
-
 type personsDataType = {
     id: number
     name: string
@@ -23,7 +20,10 @@ type postsDataType = {
 }
 
 export type RootStateType = {
-    profilePage: { postsData: Array<postsDataType> }
+    profilePage: {
+        postsData: Array<postsDataType>,
+        newPostText: string;
+    }
     dialogsPage: {
         personsData: Array<personsDataType>
         messagesData: Array<messagesDataType>
@@ -37,12 +37,14 @@ export type RootStateType = {
     }
 }
 
+
 let state: RootStateType = {
     profilePage: {
         postsData: [
             {id: 1, text: "Hi, how a u?", likeCount: 15},
             {id: 2, text: "Its my first post", likeCount: 10}
-        ]
+        ],
+        newPostText: ""
     },
 
     dialogsPage: {
@@ -72,15 +74,20 @@ let state: RootStateType = {
     }
 }
 
-export let addPostToUI = () => {
-
+export let addPost = () => {
+    let newPost: postsDataType = {id: 3, text: state.profilePage.newPostText, likeCount: 0}
+    state.profilePage.postsData.push(newPost);
+    state.profilePage.newPostText = "";
     rerenderEntireTree(state)
-
 };
 
-export let addPostToState = (postMessage: string) => {
-    const post: postsDataType = {id: 3, text: postMessage, likeCount: 0}
-    state.profilePage.postsData.push(post);
+
+export const updateNewPostText = (newPostText: string) => {
+    state.profilePage.newPostText = newPostText;
+    rerenderEntireTree(state)
 };
+
+
+
 
 export default state;

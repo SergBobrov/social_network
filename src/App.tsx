@@ -14,8 +14,8 @@ import { Friends } from './components/Friends/Friends';
 
 type AppType = {
     appState: RootStateType
-    addPostToUI: () => void
-    addPostToState: (s: string) => void
+    addPost: () => void
+    updateNewPostText: (s: string) => void
 }
 
 
@@ -26,8 +26,10 @@ const App = (props: AppType) => {
                 <Header/>
                 <Nav/>
                 <div className="app-wrapper-content">
-                    <Route path='/profile' render={() => <Profile postsData={props.appState.profilePage.postsData} addPostToUI={props.addPostToUI}
-                                                                  addPostToState = {props.addPostToState}
+                    <Route path='/profile' render={() => <Profile postsData={props.appState.profilePage.postsData}
+                                                                  addPost = {props.addPost}
+                                                                  newPostText = {props.appState.profilePage.newPostText}
+                                                                  updateNewPostText = {props.updateNewPostText}
                     />}/>
                     <Route path='/Dialogs' render={() => <Dialogs personsData={props.appState.dialogsPage.personsData}
                                                                   messagesData={props.appState.dialogsPage.messagesData}/>}/>
