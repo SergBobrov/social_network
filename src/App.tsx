@@ -8,12 +8,12 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import {News} from "./components/News/News";
 import {Music} from './components/Music/Music';
 import {Settings} from './components/Settings/Settings';
-import {RootStateType} from './redux/State';
+import {StateType} from './redux/State';
 import { Friends } from './components/Friends/Friends';
 
 
 type AppType = {
-    appState: RootStateType
+    appState: StateType
     addPost: () => void
     updateNewPostText: (s: string) => void
 }

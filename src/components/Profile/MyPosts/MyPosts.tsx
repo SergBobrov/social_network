@@ -26,10 +26,12 @@ export const MyPosts = (props: MyPostsPropsType) => {
 
 
     const addPost = () => {
+        console.log("onClick");
         props.addPost()
     };
 
     const onPostChane = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        console.log("onChange");
         props.updateNewPostText(e.currentTarget.value)
     };
 
