@@ -1,3 +1,6 @@
+export const UPDATE_NEW_POST_TEXT = "UPDATE_NEW_POST_TEXT"
+export const ADD_POST = "ADD-POST"
+
 type personsDataType = {
     id: number
     name: string
@@ -47,14 +50,14 @@ export type ActionsType = ReturnType<typeof addPostActionCreator> | ReturnType<t
 
 export const UpdateNewPostTextActionCreator = (text: string) => {
     return {
-        type: "UPDATE-NEW-POST-TEXT",
+        type: UPDATE_NEW_POST_TEXT,
         newPostText: text
     } as const
 }
 
 export const addPostActionCreator = () => {
     return {
-        type: "ADD-POST"
+        type: ADD_POST
     } as const
 }
 
@@ -106,13 +109,13 @@ export const store: StoreType = {
     },
 
     dispatch(action: ActionsType) {
-        if (action.type === "ADD-POST") {
+        if (action.type === ADD_POST) {
             console.log("addPost");
             let newPost: postsDataType = {id: 3, text: this._state.profilePage.newPostText, likeCount: 0}
             this._state.profilePage.postsData.push(newPost);
             this._state.profilePage.newPostText = "";
             this._callSubscriber(this)
-        } else if (action.type === "UPDATE-NEW-POST-TEXT") {
+        } else if (action.type === UPDATE_NEW_POST_TEXT) {
             store._state.profilePage.newPostText = action.newPostText;
             this._callSubscriber(this)
 
