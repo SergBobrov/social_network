@@ -8,8 +8,7 @@ type FriendsType = {
     friendData: Array<{
         id: number
         name: string
-        img: object
-    }>
+        }>
 }
 
 export function Friends(props: FriendsType) {

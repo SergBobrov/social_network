@@ -8,35 +8,34 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import {News} from "./components/News/News";
 import {Music} from './components/Music/Music';
 import {Settings} from './components/Settings/Settings';
-import {StateType} from './redux/State';
-import { Friends } from './components/Friends/Friends';
+import {StoreType} from './redux/State';
+import {Friends} from './components/Friends/Friends';
 
 
 type AppType = {
-    appState: StateType
-    addPost: () => void
-    updateNewPostText: (s: string) => void
+    store: StoreType
 }
 
 
 const App = (props: AppType) => {
+
+    let state = props.store.getState();
+
     return (
         <BrowserRouter>
             <div className="app-wrapper">
                 <Header/>
                 <Nav/>
                 <div className="app-wrapper-content">
-                    <Route path='/profile' render={() => <Profile postsData={props.appState.profilePage.postsData}
-                                                                  addPost = {props.addPost}
-                                                                  newPostText = {props.appState.profilePage.newPostText}
-                                                                  updateNewPostText = {props.updateNewPostText}
+                    <Route path='/profile' render={() => <Profile profilePage={state.profilePage}
+                                                                  dispatch={props.store.dispatch.bind(props.store)}
                     />}/>
-                    <Route path='/Dialogs' render={() => <Dialogs personsData={props.appState.dialogsPage.personsData}
-                                                                  messagesData={props.appState.dialogsPage.messagesData}/>}/>
+                    <Route path='/Dialogs' render={() => <Dialogs personsData={state.dialogsPage.personsData}
+                                                                  messagesData={state.dialogsPage.messagesData}/>}/>
                     <Route path='/News' render={() => <News/>}/>
                     <Route path='/Music' render={() => <Music/>}/>
                     <Route path='/Settings' render={() => <Settings/>}/>
-                    <Route path='/Friends' render={() => <Friends friendData={props.appState.sideBar.friends}/>}/>
+                    <Route path='/Friends' render={() => <Friends friendData={state.sideBar.friends}/>}/>
 
                 </div>
             </div>

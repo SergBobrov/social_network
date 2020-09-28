@@ -1,24 +1,18 @@
 import React, {ChangeEvent} from "react";
 import classes from './MyPosts.module.css';
 import {Post} from "./Post/Post";
+import {ActionsType, addPostActionCreator, profilePageType, UpdateNewPostTextActionCreator} from "../../../redux/State";
 
 
 type MyPostsPropsType = {
-    postsData: Array<{
-        id: number
-        text: string
-        likeCount: number
-    }>
-    addPost: () => void
-    newPostText: string
-    updateNewPostText: (s: string) => void
-
+    profilePage: profilePageType
+    dispatch: (action: ActionsType) => void
 }
 
 
 export const MyPosts = (props: MyPostsPropsType) => {
 
-    let postsElement = props.postsData.map((t) => {
+    let postsElement = props.profilePage.postsData.map((t) => {
         return (
             <Post message={t.text} likeCount={t.likeCount} key={t.id}/>
         )
@@ -26,15 +20,15 @@ export const MyPosts = (props: MyPostsPropsType) => {
 
 
     const addPost = () => {
-        console.log("onClick");
-        props.addPost()
+        props.dispatch(addPostActionCreator())
     };
 
     const onPostChane = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        console.log("onChange");
-        props.updateNewPostText(e.currentTarget.value)
-    };
+        props.dispatch(UpdateNewPostTextActionCreator(e.currentTarget.value)
+        )
 
+
+    };
 
 
     return (
@@ -43,14 +37,12 @@ export const MyPosts = (props: MyPostsPropsType) => {
             <div>
                 <div>
                     <textarea
-                              value={props.newPostText}
-                              onChange={onPostChane}
-                    ></textarea>
-
+                        onChange={onPostChane}
+                        value={props.profilePage.newPostText}
+                    />
                 </div>
                 <div>
                     <button
-
                         onClick={addPost}>Add post
                     </button>
                 </div>

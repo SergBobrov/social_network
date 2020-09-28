@@ -1,20 +1,18 @@
-import state, {StateType, subscribe} from "./redux/State";
+import {store, StoreType} from "./redux/State";
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import {addPost, updateNewPostText} from "./redux/State";
 
 
-let rerenderEntireTree = (state: StateType ) => {
+let rerenderEntireTree = (store: StoreType) => {
+
     console.log('rerenderEntireTree в index');
     ReactDOM.render(
         <React.StrictMode>
             <App
-                appState={state}
-                addPost={addPost}
-                updateNewPostText={updateNewPostText}
+                store={store}
             />
 
 
@@ -31,8 +29,8 @@ let rerenderEntireTree = (state: StateType ) => {
 }
 
 
-rerenderEntireTree(state)
+rerenderEntireTree(store)
 
-subscribe(rerenderEntireTree)
+store.subscribe(rerenderEntireTree)
 
 
