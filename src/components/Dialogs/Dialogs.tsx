@@ -1,51 +1,51 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import classes from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
+import {SendMessageActionCreator, StoreType, UpdateNewMessageBodyActionCreator} from "../../redux/State";
 
-export type DialogsType = {
-    personsData: Array<{
-        id: number
-        name: string
-    }>,
-    messagesData: Array<{
-        id: number
-        text: string
-    }>
+
+type DialogsType = {
+    store: StoreType
 }
 
 export const Dialogs = (props: DialogsType) => {
 
-    let sendedMessage = React.createRef<HTMLTextAreaElement>();
+    let state = props.store.getState();
 
-    let sendMessage = () => {
-        alert(sendedMessage.current?.value);
+    let dialogElements = state.dialogsPage.dialogs.map((t) => {
+        return (<DialogItem name={t.name} id={t.id} key={t.id}/>)
+    })
+    let messageElements = state.dialogsPage.messages.map((t) => {
+        return (<Message text={t.text} key={t.id}/>)
+    })
+    let onSendMessageClick = () => {
+        props.store.dispatch(SendMessageActionCreator)
+    };
+
+    let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        if (e.currentTarget.value) {
+            let body = e.currentTarget.value;
+            props.store.dispatch(UpdateNewMessageBodyActionCreator(body))
+        }
+
+
     };
 
     return (
         <div className={classes.dialogs}>
             <div className={classes.dialogItems}>
-                {props.personsData.map((t) => {
-                    return (
-                        <DialogItem name={t.name} id={t.id} key={t.id}/>
-                    )
-                })}
-                <hr/>
-                <textarea ref={sendedMessage}></textarea> <hr/>
-
-                <button onClick={sendMessage}> Send </button>
-
+                {dialogElements}
             </div>
-
-
-
             <div className={classes.messages}>
-                {props.messagesData.map((t) => {
-                        return (
-                            <Message text={t.text} key={t.id}/>)
-                    }
-                )}
-
+                <div>{messageElements}</div>
+                <div>
+                    <div><textarea value={state.dialogsPage.newMessageBody} onChange={onNewMessageChange}
+                                   placeholder={"Enter your message"}/></div>
+                    <div>
+                        <button onClick={onSendMessageClick}>Send</button>
+                    </div>
+                </div>
             </div>
 
         </div>

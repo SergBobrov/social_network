@@ -30,8 +30,7 @@ const App = (props: AppType) => {
                     <Route path='/profile' render={() => <Profile profilePage={state.profilePage}
                                                                   dispatch={props.store.dispatch.bind(props.store)}
                     />}/>
-                    <Route path='/Dialogs' render={() => <Dialogs personsData={state.dialogsPage.personsData}
-                                                                  messagesData={state.dialogsPage.messagesData}/>}/>
+                    <Route path='/Dialogs' render={() => <Dialogs store={props.store}/>}/>
                     <Route path='/News' render={() => <News/>}/>
                     <Route path='/Music' render={() => <Music/>}/>
                     <Route path='/Settings' render={() => <Settings/>}/>
