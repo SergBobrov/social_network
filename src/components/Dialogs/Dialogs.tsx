@@ -20,7 +20,7 @@ export const Dialogs = (props: DialogsType) => {
         return (<Message text={t.text} key={t.id}/>)
     })
     let onSendMessageClick = () => {
-        props.store.dispatch(SendMessageActionCreator)
+        props.store.dispatch(SendMessageActionCreator())
     };
 
     let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {

@@ -65,8 +65,6 @@ export const UpdateNewPostTextActionCreator = (text: string) => {
         newPostText: text
     } as const
 }
-
-
 export const addPostActionCreator = () => {
     return (
         {type: ADD_POST} as const
@@ -152,8 +150,10 @@ export const store: StoreType = {
             this._callSubscriber(this)
         } else if (action.type === SEND_MESSAGE) {
             let newMessage = {id: 6, text: this._state.dialogsPage.newMessageBody}
-            this._state.dialogsPage.newMessageBody = ""
             this._state.dialogsPage.messages.push(newMessage);
+            console.log(this._state.dialogsPage.messages);
+            this._state.dialogsPage.newMessageBody = ""
+            this._callSubscriber(this)
         }
 
     }
