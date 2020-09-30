@@ -22,8 +22,8 @@ export type postsDataType = {
 }
 
 export type profilePageType = {
-    postsData: Array<postsDataType>,
-    newPostText: string;
+    postsData: Array<postsDataType>
+    newPostText: string
 }
 
 export type DialogsPageType = {
@@ -32,17 +32,18 @@ export type DialogsPageType = {
     newMessageBody: string
 }
 
+export type sideBarType = {
+    friends: Array<{
+        id: number
+        name: string
+    }>
+}
+
 
 export type StateType = {
     profilePage: profilePageType
     dialogsPage: DialogsPageType
-    sideBar:
-        {
-            friends: Array<{
-                id: number
-                name: string
-            }>
-        }
+    sideBar: sideBarType
 }
 
 export type StoreType = {
@@ -97,7 +98,6 @@ export const store: StoreType = {
             ],
             newPostText: ""
         },
-
         dialogsPage: {
             dialogs: [
                 {id: 1, name: "Dimych"},
