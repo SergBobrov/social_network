@@ -2,7 +2,8 @@ import React, {ChangeEvent} from "react";
 import classes from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {SendMessageActionCreator, StoreType, UpdateNewMessageBodyActionCreator} from "../../redux/State";
+import {StoreType} from "../../redux/Store";
+import {SendMessageActionCreator, UpdateNewMessageBodyActionCreator} from "../../redux/dialogs-reducer";
 
 
 type DialogsType = {
@@ -20,7 +21,7 @@ export const Dialogs = (props: DialogsType) => {
         return (<Message text={t.text} key={t.id}/>)
     })
     let onSendMessageClick = () => {
-        props.store.dispatch(SendMessageActionCreator())
+        props.store.dispatch(SendMessageActionCreator());
     };
 
     let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {

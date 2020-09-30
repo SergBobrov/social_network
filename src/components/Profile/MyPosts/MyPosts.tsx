@@ -1,7 +1,8 @@
 import React, {ChangeEvent} from "react";
 import classes from './MyPosts.module.css';
 import {Post} from "./Post/Post";
-import {ActionsType, addPostActionCreator, profilePageType, UpdateNewPostTextActionCreator} from "../../../redux/State";
+import {ActionsType, profilePageType} from "../../../redux/Store";
+import {addPostActionCreator, UpdateNewPostTextActionCreator} from "../../../redux/profile-reducer";
 
 
 type MyPostsPropsType = {
@@ -24,9 +25,8 @@ export const MyPosts = (props: MyPostsPropsType) => {
     };
 
     const onPostChane = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(UpdateNewPostTextActionCreator(e.currentTarget.value)
-        )
-
+        debugger
+        props.dispatch(UpdateNewPostTextActionCreator(e.currentTarget.value))
 
     };
 
