@@ -7,7 +7,9 @@ import {addPostActionCreator, UpdateNewPostTextActionCreator} from "../../../red
 
 type MyPostsPropsType = {
     profilePage: profilePageType
-    dispatch: (action: ActionsType) => void
+    updateNewPostText: (text: string) => void
+    addPost: () => void
+    newPostText: string
 }
 
 
@@ -21,13 +23,12 @@ export const MyPosts = (props: MyPostsPropsType) => {
 
 
     const addPost = () => {
-        props.dispatch(addPostActionCreator())
+        props.addPost()
     };
 
     const onPostChane = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        debugger
-        props.dispatch(UpdateNewPostTextActionCreator(e.currentTarget.value))
-
+        let text = e.currentTarget.value
+        props.updateNewPostText(text)
     };
 
 
@@ -38,7 +39,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
                 <div>
                     <textarea
                         onChange={onPostChane}
-                        value={props.profilePage.newPostText}
+                        value={props.newPostText}
                     />
                 </div>
                 <div>
