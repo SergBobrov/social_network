@@ -10,6 +10,7 @@ import {Music} from './components/Music/Music';
 import {Settings} from './components/Settings/Settings';
 import {Friends} from './components/Friends/Friends';
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
+import {FriendsContainer} from "./components/Friends/FriendsContainer";
 
 
 type PropsType = {
@@ -17,7 +18,7 @@ type PropsType = {
 }
 
 
-const App = (props: PropsType) => {
+const App = () => {
 
     return (
         <BrowserRouter>
@@ -25,12 +26,12 @@ const App = (props: PropsType) => {
                 <Header/>
                 <Nav/>
                 <div className="app-wrapper-content">
-                    <Route path='/profile' render={() => <Profile store={props.store}/>}/>
-                    <Route path='/Dialogs' render={() => <DialogsContainer store={props.store}/>}/>
+                    <Route path='/profile' render={() => <Profile/>}/>
+                    <Route path='/Dialogs' render={() => <DialogsContainer/>}/>
                     <Route path='/News' render={() => <News/>}/>
                     <Route path='/Music' render={() => <Music/>}/>
                     <Route path='/Settings' render={() => <Settings/>}/>
-                    <Route path='/Friends' render={() => <Friends friendData={props.store.sideBar.friends}/>}/>
+                    <Route path='/Friends' render={() => <FriendsContainer/>}/>
 
                 </div>
             </div>
