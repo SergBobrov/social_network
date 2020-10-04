@@ -54,6 +54,8 @@ export type StateType = {
     sideBar: sideBarType
 }
 
+
+
 export type StoreType = {
     _state: StateType
     getState: () => StateType
@@ -63,6 +65,8 @@ export type StoreType = {
     dispatch: (action: ActionsType) => void
 
 };
+
+
 
 export type ActionsType = ReturnType<typeof addPostActionCreator> | ReturnType<typeof UpdateNewPostTextActionCreator>
     | ReturnType<typeof UpdateNewMessageBodyActionCreator> | ReturnType<typeof SendMessageActionCreator>

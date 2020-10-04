@@ -9,7 +9,6 @@ type MyPostsPropsType = {
     profilePage: profilePageType
     updateNewPostText: (text: string) => void
     addPost: () => void
-    newPostText: string
 }
 
 
@@ -39,7 +38,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
                 <div>
                     <textarea
                         onChange={onPostChane}
-                        value={props.newPostText}
+                        value={props.profilePage.newPostText}
                     />
                 </div>
                 <div>
