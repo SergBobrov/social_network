@@ -5,24 +5,24 @@ export const SEND_MESSAGE = "SEND_MESSAGE"
 
 
 let initialState = {
-        dialogs: [
-            {id: 1, name: "Dimych"},
-            {id: 2, name: "Sveta"},
-            {id: 3, name: "Valera"},
-            {id: 4, name: "Sasha"},
-            {id: 5, name: "Vlad"},
-            {id: 6, name: "Nansy"}
-        ],
-        messages: [
-            {id: 1, text: "Hi"},
-            {id: 2, text: "Sveta"},
-            {id: 3, text: "Hey"},
-            {id: 4, text: "Wats"},
-            {id: 5, text: "Hello"},
-            {id: 6, text: "Youu"}
-        ],
-        newMessageBody: ""
-    }
+    dialogs: [
+        {id: 1, name: "Dimych"},
+        {id: 2, name: "Sveta"},
+        {id: 3, name: "Valera"},
+        {id: 4, name: "Sasha"},
+        {id: 5, name: "Vlad"},
+        {id: 6, name: "Nansy"}
+    ],
+    messages: [
+        {id: 1, text: "Hi"},
+        {id: 2, text: "Sveta"},
+        {id: 3, text: "Hey"},
+        {id: 4, text: "Wats"},
+        {id: 5, text: "Hello"},
+        {id: 6, text: "Youu"}
+    ],
+    newMessageBody: ""
+}
 
 export const SendMessageActionCreator = () => {
     return (
@@ -40,17 +40,22 @@ export const UpdateNewMessageBodyActionCreator = (text: string) => {
     )
 };
 
-const dialogsReducer = (state: DialogsPageType=initialState, action: ActionsType) => {
+const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsType) => {
 
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_BODY:
-            state.newMessageBody = action.newMessageBody
-            return state
+            return {
+                ...state,
+                newMessageBody: action.newMessageBody
+            }
         case SEND_MESSAGE:
-            let newMessage = {id: 6, text: state.newMessageBody}
-            state.messages.push(newMessage);
-            state.newMessageBody = ""
-            return state
+            let newState = {
+                ...state,
+                messages: [...state.messages],
+                newMessageBody: ""
+            }
+            newState.messages.push({id: 6, text: state.newMessageBody})
+            return newState;
     }
     return state
 

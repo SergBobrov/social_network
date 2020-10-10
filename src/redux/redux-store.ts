@@ -16,4 +16,8 @@ let store = createStore(reducers);
 
 store.getState()
 
+
+// @ts-ignore
+window.store = store;
+
 export default store;
