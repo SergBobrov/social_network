@@ -10,6 +10,7 @@ type MyPostsPropsType = {
     updateNewPostText: (text: string) => void
     addPost: () => void
     // test
+    // test test
 }
 
 
