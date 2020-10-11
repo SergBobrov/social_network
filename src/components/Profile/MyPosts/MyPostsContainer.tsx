@@ -1,8 +1,7 @@
 import {addPostActionCreator, UpdateNewPostTextActionCreator} from "../../../redux/profile-reducer";
 import {MyPosts} from "./MyPosts";
 import {connect} from "react-redux";
-import {AppStateType} from "../../../redux/redux-store";
-import {ActionsType} from "../../../redux/Store";
+import {ActionsType, AppStateType} from "../../../redux/redux-store";
 
 
 const MapStateToProps = (state: AppStateType) => {

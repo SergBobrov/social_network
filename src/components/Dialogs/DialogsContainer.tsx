@@ -2,8 +2,7 @@ import React from "react";
 import {SendMessageActionCreator, UpdateNewMessageBodyActionCreator} from "../../redux/dialogs-reducer";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
-import {AppStateType} from "../../redux/redux-store";
-import {ActionsType} from "../../redux/Store";
+import {ActionsType, AppStateType} from "../../redux/redux-store";
 
 
 let mapStateToProps = (state: AppStateType) => {

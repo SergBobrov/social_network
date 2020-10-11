@@ -1,7 +1,18 @@
-import {ActionsType, profilePageType} from "./Store";
+import {ActionsType} from "./redux-store";
 
 export const UPDATE_NEW_POST_TEXT = "UPDATE_NEW_POST_TEXT"
 export const ADD_POST = "ADD-POST"
+
+type postsDataType = {
+    id: number
+    text: string
+    likeCount: number
+}
+
+export type profilePageType = {
+    postsData: Array<postsDataType>
+    newPostText: string
+}
 
 let initialState = {
     postsData: [
