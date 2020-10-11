@@ -49,13 +49,11 @@ const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsTy
                 newMessageBody: action.newMessageBody
             }
         case SEND_MESSAGE:
-            let newState = {
+            return {
                 ...state,
-                messages: [...state.messages],
+                messages: [...state.messages, {id: 6, text: state.newMessageBody}],
                 newMessageBody: ""
             }
-            newState.messages.push({id: 6, text: state.newMessageBody})
-            return newState;
     }
     return state
 
