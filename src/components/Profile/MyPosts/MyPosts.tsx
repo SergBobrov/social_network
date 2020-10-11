@@ -9,6 +9,7 @@ type MyPostsPropsType = {
     profilePage: profilePageType
     updateNewPostText: (text: string) => void
     addPost: () => void
+    // test
 }
 
 
