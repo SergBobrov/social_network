@@ -3,14 +3,13 @@ import './App.css';
 import {Header} from "./components/Header/Header";
 import {Nav} from "./components/NavBar/Nav";
 import {Profile} from "./components/Profile/Profile";
-import {Dialogs} from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from 'react-router-dom';
 import {News} from "./components/News/News";
 import {Music} from './components/Music/Music';
 import {Settings} from './components/Settings/Settings';
-import {Friends} from './components/Friends/Friends';
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {FriendsContainer} from "./components/Friends/FriendsContainer";
+import {Users} from "./components/Users/Users";
 
 
 type PropsType = {
@@ -31,8 +30,8 @@ const App = () => {
                     <Route path='/News' render={() => <News/>}/>
                     <Route path='/Music' render={() => <Music/>}/>
                     <Route path='/Settings' render={() => <Settings/>}/>
-                    <Route path='/Friends' render={() => <FriendsContainer/>}/>
-
+                    <Route path='/friends' render={() => <FriendsContainer/>}/>
+                    <Route path='/users' render={() => <div><Users/></div>}/>
                 </div>
             </div>
         </BrowserRouter>

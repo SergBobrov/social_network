@@ -1,16 +1,13 @@
 import React, {ChangeEvent} from "react";
 import classes from './MyPosts.module.css';
 import {Post} from "./Post/Post";
-import {ActionsType, profilePageType} from "../../../redux/Store";
-import {addPostActionCreator, UpdateNewPostTextActionCreator} from "../../../redux/profile-reducer";
+import {profilePageType} from "../../../redux/Store";
 
 
 type MyPostsPropsType = {
     profilePage: profilePageType
     updateNewPostText: (text: string) => void
     addPost: () => void
-    // test
-    // test test
 }
 
 

@@ -1,4 +1,4 @@
-import {ActionsType, postsDataType, profilePageType} from "./Store";
+import {ActionsType, profilePageType} from "./Store";
 
 export const UPDATE_NEW_POST_TEXT = "UPDATE_NEW_POST_TEXT"
 export const ADD_POST = "ADD-POST"
