@@ -8,16 +8,32 @@ type UsersStateType = {
     users: Array<UsersType>
 }
 
+// export type UsersType = {
+//     id: number
+//     photoUrl: string
+//     followed: boolean
+//     fullName: string
+//     status: string
+//     location: { city: string, country: string }
+// }
+
+
 export type UsersType = {
-    id: number
-    photoUrl: string
-    followed: boolean
-    fullName: string
-    status: string
-    location: { city: string, country: string }
+    "name": string
+    "id": number
+    "uniqueUrlName": any
+    "photos": {
+        "small": any
+        "large": any
+    }
+    "status": any
+    "followed": boolean
 }
 
-export type UsersActionsType = ReturnType<typeof followAC> | ReturnType<typeof unfollowAC> | ReturnType<typeof setUserAC>
+export type UsersActionsType =
+    ReturnType<typeof followAC>
+    | ReturnType<typeof unfollowAC>
+    | ReturnType<typeof setUserAC>
 
 let initialState: UsersStateType = {
     users: []
