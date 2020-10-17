@@ -4,18 +4,10 @@ const SET_USER = 'SET_USER'
 
 export const urlAddress = 'https://lh3.googleusercontent.com/proxy/liOZrZH9r1mF-04Um35auGflcj1phyADkSxfCPGIVZ0mxBeV8Bzx-ByGKnrKvKEUfSH5dYGp7MZGOfZjcXObnCeBMnc11RyYW3SdNiMh3mvVyHzs6BwHMNOrJ4QgkZxSImYPR5lGkYIta26IhCGbklo'
 
-type UsersStateType = {
+export type UsersStateType = {
     users: Array<UsersType>
 }
 
-// export type UsersType = {
-//     id: number
-//     photoUrl: string
-//     followed: boolean
-//     fullName: string
-//     status: string
-//     location: { city: string, country: string }
-// }
 
 
 export type UsersType = {

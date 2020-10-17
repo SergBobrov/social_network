@@ -2,7 +2,6 @@ import React from "react";
 import classes from "./Users.module.css"
 import axios from 'axios';
 import {UsersType} from "../../redux/users-reducer";
-import userPhoto from "../../assets/images/images.jpg"
 
 
 type UsersPropsType = {
@@ -30,7 +29,8 @@ export const Users = (props: UsersPropsType) => {
                             <div>
                                 <div>
                                     <img className={classes.photo}
-                                         src={u.photos.small !== null ? u.photos.small : userPhoto} alt="avatar"/>
+                                         src={''} alt="avatar"/>
+                                         {/*src={u.photos.small !== null ? u.photos.small : userPhoto} alt="avatar"/>*/}
                                 </div>
                                 <div>
                                     {u.followed ?
