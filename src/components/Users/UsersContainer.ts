@@ -1,13 +1,22 @@
 import {connect} from "react-redux";
-import {ActionsType, AppStateType} from "../../redux/redux-store";
-import {followAC, setUserAC, unfollowAC, UsersActionsType, UsersType} from "../../redux/users-reducer";
-import {UsersC} from "./UsersC";
-import {Users} from "./Users";
+import {AppStateType} from "../../redux/redux-store";
+import {
+    followAC,
+    setCurrentPageAC, setTotalCountAC,
+    setUserAC,
+    unfollowAC,
+    UsersActionsType,
+    UsersType
+} from "../../redux/users-reducer";
+import {UsersAPIComponent} from "./UsersAPIComponent";
 
 
 const mapStateToProps = (state: AppStateType) => {
     return {
-        users: state.usersPage.users
+        users: state.usersPage.users,
+        pageSize: state.usersPage.pageSize,
+        totalUsersCount: state.usersPage.totalUsersCount,
+        currantPage: state.usersPage.currantPage
     }
 }
 
@@ -21,11 +30,19 @@ const mapDispatchToProps = (dispatch: (action: UsersActionsType) => void) => {
         },
         setUsers: (users: Array<UsersType>) => {
             dispatch(setUserAC(users))
-        }
+        },
+        setCurrentPage: (CurrentPage: number) => {
+            dispatch(setCurrentPageAC(CurrentPage))
+        },
+        setTotalCount: (totalCount: number) => {
+            dispatch(setTotalCountAC(totalCount))
+        },
+
+
     }
 }
 
 
-const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersC)
+const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent)
 
 export default UsersContainer
