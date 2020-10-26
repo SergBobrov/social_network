@@ -3,13 +3,13 @@ import './App.css';
 import {Header} from "./components/Header/Header";
 import {Nav} from "./components/NavBar/Nav";
 import {Profile} from "./components/Profile/Profile";
-import {Route, Switch, Redirect} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 import {News} from "./components/News/News";
 import {Music} from './components/Music/Music';
 import {Settings} from './components/Settings/Settings';
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {FriendsContainer} from "./components/Friends/FriendsContainer";
-import UsersContainer from './components/Users/UsersContainer';
+import UsersContainer from "./components/Users/UsersContainer";
 
 
 const App = () => {
