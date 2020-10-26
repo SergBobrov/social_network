@@ -3,6 +3,7 @@ const UNFOLLOW = 'UNFOLLOW'
 const SET_USER = 'SET_USER'
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
+const TOOGLE_ISFETCHING = 'TOOGLE_ISFEPCHING'
 
 export const urlAddress = 'https://lh3.googleusercontent.com/proxy/liOZrZH9r1mF-04Um35auGflcj1phyADkSxfCPGIVZ0mxBeV8Bzx-ByGKnrKvKEUfSH5dYGp7MZGOfZjcXObnCeBMnc11RyYW3SdNiMh3mvVyHzs6BwHMNOrJ4QgkZxSImYPR5lGkYIta26IhCGbklo'
 
@@ -11,8 +12,8 @@ export type UsersStateType = {
     pageSize: number,
     totalUsersCount: number,
     currantPage: number,
+    isFetching: boolean,
 }
-
 
 
 export type UsersType = {
@@ -33,12 +34,14 @@ export type UsersActionsType =
     | ReturnType<typeof setUserAC>
     | ReturnType<typeof setCurrentPageAC>
     | ReturnType<typeof setTotalCountAC>
+    | ReturnType<typeof toogleIsFetchingАС>
 
 let initialState: UsersStateType = {
     users: [],
     pageSize: 5,
     totalUsersCount: 0,
     currantPage: 1,
+    isFetching: true,
 }
 
 const usersReducer = (state: UsersStateType = initialState, action: UsersActionsType) => {
@@ -74,6 +77,9 @@ const usersReducer = (state: UsersStateType = initialState, action: UsersActions
         case SET_TOTAL_USERS_COUNT:
             return {...state, totalUsersCount: action.totalCount}
 
+        case TOOGLE_ISFETCHING:
+            return {...state, isFetching: action.isFetching}
+
         default:
             return state
     }
@@ -100,6 +106,9 @@ export const setTotalCountAC = (totalCount: number) => {
     return ({type: SET_TOTAL_USERS_COUNT, totalCount} as const)
 }
 
+export const toogleIsFetchingАС = (isFetching: boolean) => {
+    return ({type: TOOGLE_ISFETCHING, isFetching} as const)
+}
 
 
 export default usersReducer;
