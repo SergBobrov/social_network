@@ -34,7 +34,7 @@ export type UsersActionsType =
     | ReturnType<typeof setUserAC>
     | ReturnType<typeof setCurrentPageAC>
     | ReturnType<typeof setTotalCountAC>
-    | ReturnType<typeof toogleIsFetchingАС>
+    | ReturnType<typeof toggleIsFetchingAC>
 
 let initialState: UsersStateType = {
     users: [],
@@ -106,7 +106,7 @@ export const setTotalCountAC = (totalCount: number) => {
     return ({type: SET_TOTAL_USERS_COUNT, totalCount} as const)
 }
 
-export const toogleIsFetchingАС = (isFetching: boolean) => {
+export const toggleIsFetchingAC = (isFetching: boolean) => {
     return ({type: TOOGLE_ISFETCHING, isFetching} as const)
 }
 
