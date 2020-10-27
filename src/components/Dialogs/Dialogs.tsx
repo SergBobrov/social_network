@@ -38,7 +38,7 @@ export const Dialogs = (props: DialogsPropsType) => {
     };
 
     return (
-        <div className={classes.dialogs}>
+        <div className={`${classes.dialogs} + ${classes.chat}` }>
             <div className={classes.dialogItems}>
                 {dialogElements}
             </div>

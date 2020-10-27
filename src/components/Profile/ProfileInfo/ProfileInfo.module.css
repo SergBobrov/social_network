@@ -1,3 +1,16 @@
-.descriptionBlock {
- padding: 25px;
+.profileInfo {
+ display: flex;
+ padding: 10px;
+}
+
+.description {
+ width: 50%;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+}
+
+.description span {
+ margin: 5px;
+ font-weight: bold;
 }

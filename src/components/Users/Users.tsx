@@ -21,17 +21,17 @@ export const Users = (props: UsersPropsType) => {
 
     let pages = []
 
-    for (let i = 1; i <= 25; i++) {
+    for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
 
     return (
         <div>
             <div>
-                <div>
-                    {pages.map(page => {
+                <div className={classes.pagination}>
+                    {pages.map((page, index) => {
                         return (
-                            <span onClick={() => {
+                            <span key={index} onClick={() => {
                                 props.currantPageHandler(page)
                             }}
                                   className={props.currantPage === page ? classes.selectedPage : 'null'}>{page}</span>

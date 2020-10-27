@@ -15,7 +15,7 @@ const avaStyle = {
     }
 
 export const DialogItem = (props: DialogItemPropsType) => {
-    let path = classes.dialog + " " + classes.active;
+    // let path = classes.dialog + " " + classes.active;
     return (
         <div className={classes.path}>
             <img style={avaStyle} src={avaSmall} alt=""/>
