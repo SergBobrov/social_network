@@ -6,7 +6,7 @@ import defaultImage from './../../../assets/images/default.png'
 
 
 type ProfileInfoType = {
-    profile: profileType
+    profile: profileType | null
 }
 
 export const ProfileInfo = (props: ProfileInfoType) => {

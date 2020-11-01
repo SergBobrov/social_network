@@ -9,7 +9,7 @@ import {withRouter, RouteComponentProps} from 'react-router-dom'
 
 type ProfileContainerProps = {
     setUserProfile: (profile: profileType) => void
-    profile: profileType
+    profile: profileType | null
 }
 
 

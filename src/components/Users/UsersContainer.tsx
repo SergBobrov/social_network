@@ -7,10 +7,11 @@ import {
     setCurrentPageAC, setTotalCountAC,
     setUserAC, toggleIsFetchingAC,
     unfollowAC,
-    UsersType} from "../../redux/users-reducer";
+    UsersType
+} from "../../redux/users-reducer";
 import {Users} from './Users'
 import {Preloader} from "../../assets/preloader/Preloader";
-
+import {usersAPI} from "../../api/api";
 
 
 type UsersContainerType = {
@@ -31,31 +32,22 @@ class UsersContainer extends React.Component<UsersContainerType> {
 
     componentDidMount() {
         this.props.toggleIsFetchingAC(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currantPage}&count=${this.props.pageSize}`,{
-            withCredentials: true,
-            headers: {'API-KEY': '64e9bc29-de8f-41f7-952f-c3c54b8f9de2'}
 
+        usersAPI.getUsers(this.props.currantPage, this.props.pageSize).then(data => {
+            this.props.toggleIsFetchingAC(false)
+            this.props.setUserAC(data.items)
+            this.props.setTotalCountAC(data.totalCount)
         })
-            .then(response => {
-                this.props.toggleIsFetchingAC(false)
-                this.props.setUserAC(response.data.items)
-                this.props.setTotalCountAC(response.data.totalCount)
-            })
     }
 
     currantPageHandler = (pageNumber: number) => {
         this.props.toggleIsFetchingAC(true)
         this.props.setCurrentPageAC(pageNumber)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`,
-            {
-                withCredentials: true,
-                headers: {'API-KEY': '64e9bc29-de8f-41f7-952f-c3c54b8f9de2'}
-            }
-            )
-            .then(response => {
-                this.props.toggleIsFetchingAC(false)
-                this.props.setUserAC(response.data.items)
-            })
+
+        usersAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
+            this.props.toggleIsFetchingAC(false)
+            this.props.setUserAC(data.items)
+        })
     }
 
     render() {
