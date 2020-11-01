@@ -8,12 +8,14 @@ import {AuthStateType, setAuthUserData} from "../../redux/auth-reducer";
 
 type HeaderContainerType = {
     setAuthUserData: (data: AuthStateType) => void
+    isAuth: boolean
+    login: string | null
 }
 
 
 class HeaderContainer extends React.Component<HeaderContainerType> {
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.1/auth/me`, {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
             withCredentials: true
         })
             .then(resp => {
@@ -25,14 +27,19 @@ class HeaderContainer extends React.Component<HeaderContainerType> {
 
     render() {
         return (
-            <Header/>
+            <Header isAuth={this.props.isAuth} login={this.props.login}/>
         )
     }
 }
 
 const mapStateToProps = (state: AppStateType) => {
-    {
-    }
+    return (
+        {
+            isAuth: state.auth.isAuth,
+            login: state.auth.login,
+        }
+    )
+
 }
 
 export default connect(mapStateToProps, {

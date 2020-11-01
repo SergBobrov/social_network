@@ -1,11 +1,11 @@
 const SET_USER_DATA = 'SET_USER_DATA'
-const UNFOLLOW = 'UNFOLLOW'
 
 
 export type AuthStateType = {
-    userId: null | number,
+    id: null | number,
     email: null | string,
     login: null | string,
+    isAuth: boolean,
 }
 
 
@@ -14,9 +14,10 @@ export type AuthActionsType =
 
 
 let initialState: AuthStateType = {
-    userId: null,
+    id: null,
     email: null,
     login: null,
+    isAuth: false,
 }
 
 export const authReducer = (state: AuthStateType = initialState, action: AuthActionsType) => {
@@ -25,7 +26,8 @@ export const authReducer = (state: AuthStateType = initialState, action: AuthAct
         case SET_USER_DATA :
             return {
                 ...state,
-                ...action.data
+                ...action.data,
+                isAuth: true
             }
         default:
             return state
