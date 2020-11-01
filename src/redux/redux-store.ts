@@ -3,12 +3,14 @@ import profileReducer, {addPostActionCreator, UpdateNewPostTextActionCreator} fr
 import dialogsReducer, {SendMessageActionCreator, UpdateNewMessageBodyActionCreator} from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
 import usersReducer from "./users-reducer";
+import {authReducer} from "./auth-reducer";
 
 let reducers = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     sideBar: sidebarReducer,
-    usersPage: usersReducer
+    usersPage: usersReducer,
+    auth: authReducer,
 });
 
 export type ActionsType = ReturnType<typeof addPostActionCreator> | ReturnType<typeof UpdateNewPostTextActionCreator>

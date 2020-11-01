@@ -18,11 +18,8 @@ export const Post = (props: postType ) => {
                 <span>like </span>
                 <span>{props.likeCount}</span>
             </div>
-
-            <input value='' />
-            <input value='' />
+            <input defaultValue='' />
+            <input defaultValue='' />
         </div>
-
-
 );
 };
