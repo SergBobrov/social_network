@@ -53,37 +53,39 @@ export const Users = (props: UsersPropsType) => {
                                         </NavLink>
                                     </div>
                                     <div>
-                                        {/*{u.followed ? <button onClick={() => {*/}
-
-                                        {/*        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {*/}
-                                        {/*            withCredentials: true,*/}
-                                        {/*            headers: {'API-KEY': '64e9bc29-de8f-41f7-952f-c3c54b8f9de2'}*/}
-                                        {/*        }).then(resp => {*/}
-                                        {/*            if(resp.data.resultCode === 0)*/}
-                                        {/*            {*/}
-                                        {/*                props.unfollow(u.id)*/}
-                                        {/*            }*/}
-                                        {/*            console.log(u.followed);*/}
-                                        {/*        })*/}
-                                        {/*    }}>unfollow</button> :*/}
-                                        {/*    <button onClick={() => {*/}
-                                        {/*        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {*/}
-                                        {/*            withCredentials: true,*/}
-                                        {/*            headers: {'API-KEY': '64e9bc29-de8f-41f7-952f-c3c54b8f9de2'}*/}
-                                        {/*        }).then(resp => {*/}
-                                        {/*            if (resp.data.resultCode === 0) {*/}
-                                        {/*                props.follow(u.id)*/}
-                                        {/*            }*/}
-                                        {/*        })*/}
-                                        {/*    }}>follow</button>}*/}
-
-
                                         {u.followed ? <button onClick={() => {
-                                                props.unfollow(u.id)
+
+                                                axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
+                                                    withCredentials: true,
+                                                    headers: {'API-KEY': '64e9bc29-de8f-41f7-952f-c3c54b8f9de2'}
+                                                }).then(resp => {
+                                                    debugger
+
+                                                    if(resp.data.resultCode === 0)
+                                                    {
+                                                        props.unfollow(u.id)
+                                                    }
+                                                    console.log(u.followed);
+                                                })
                                             }}>unfollow</button> :
                                             <button onClick={() => {
-                                                props.follow(u.id)
+                                                axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
+                                                    withCredentials: true,
+                                                    headers: {'API-KEY': '64e9bc29-de8f-41f7-952f-c3c54b8f9de2'}
+                                                }).then(resp => {
+                                                    if (resp.data.resultCode === 0) {
+                                                        props.follow(u.id)
+                                                    }
+                                                })
                                             }}>follow</button>}
+
+
+                                        {/*{u.followed ? <button onClick={() => {*/}
+                                        {/*        props.unfollow(u.id)*/}
+                                        {/*    }}>unfollow</button> :*/}
+                                        {/*    <button onClick={() => {*/}
+                                        {/*        props.follow(u.id)*/}
+                                        {/*    }}>follow</button>}*/}
 
 
                                     </div>

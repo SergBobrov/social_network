@@ -11,7 +11,7 @@ type postsDataType = {
 export type profilePageType = {
     postsData: Array<postsDataType>
     newPostText: string
-    profile: profileType
+    profile: profileType | null
 }
 
 export type profileType = {
@@ -44,8 +44,8 @@ let initialState: profilePageType = {
         {id: 2, text: "Its my first post", likeCount: 10}
     ],
     newPostText: "",
-    // @ts-ignore
-    profile: null
+
+    profile: null as profileType | null
 }
 
 
