@@ -26,7 +26,7 @@ type UsersContainerType = {
     isFetching: boolean
     toggleIsFetchingAC: (isFetching: boolean) => void
     toggleIsFollowingAC: (isFollowing: boolean, id: number) => void
-    isFollowing: Array<number>
+    followingInProgress: number[]
 }
 
 class UsersContainer extends React.Component<UsersContainerType> {
@@ -64,7 +64,7 @@ class UsersContainer extends React.Component<UsersContainerType> {
                     follow={this.props.followAC}
                     unfollow={this.props.unfollowAC}
                     toggleIsFollowingAC={this.props.toggleIsFollowingAC}
-                    isFollowing={this.props.isFollowing}
+                    followingInProgress={this.props.followingInProgress}
                 />
             </>
         )
@@ -78,7 +78,7 @@ const mapStateToProps = (state: AppStateType) => {
         totalUsersCount: state.usersPage.totalUsersCount,
         currantPage: state.usersPage.currantPage,
         isFetching: state.usersPage.isFetching,
-        isFollowing: state.usersPage.followingInProgress
+        followingInProgress: state.usersPage.followingInProgress,
     }
 }
 

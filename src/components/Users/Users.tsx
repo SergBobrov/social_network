@@ -15,7 +15,7 @@ type UsersPropsType = {
     follow: (u: number) => void
     unfollow: (u: number) => void
     toggleIsFollowingAC: (isFollowing: boolean, id: number) => void
-    isFollowing: Array<number>
+    followingInProgress: number[]
 }
 
 export const Users = (props: UsersPropsType) => {
@@ -56,9 +56,8 @@ export const Users = (props: UsersPropsType) => {
                                         </NavLink>
                                     </div>
                                     <div>
-                                        {u.followed ? <button disabled={props.isFollowing.some(t => t===u.id)} onClick={() => {
+                                        {u.followed ? <button disabled={props.followingInProgress.some(t => t===u.id)} onClick={() => {
                                                 props.toggleIsFollowingAC(true, u.id)
-                                                console.log(props.isFollowing);
                                                 usersAPI.deleteUnfollowUser(u.id).then(data => {
                                                     if (data.resultCode === 0) {
                                                         props.unfollow(u.id)
@@ -66,7 +65,7 @@ export const Users = (props: UsersPropsType) => {
                                                     }
                                                 })
                                             }}>unfollow</button> :
-                                            <button disabled={props.isFollowing.some(t => t===u.id)} onClick={() => {
+                                            <button disabled={props.followingInProgress.some(t => t===u.id)} onClick={() => {
                                                 props.toggleIsFollowingAC(true, u.id)
                                                 usersAPI.postFollowUser(u.id).then(data => {
                                                     if (data.resultCode === 0) {
