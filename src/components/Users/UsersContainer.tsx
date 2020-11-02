@@ -25,8 +25,8 @@ type UsersContainerType = {
     setTotalCountAC: (userCount: number) => void
     isFetching: boolean
     toggleIsFetchingAC: (isFetching: boolean) => void
-    toggleIsFollowingAC: (isFollowing: boolean) => void
-    isFollowing: boolean
+    toggleIsFollowingAC: (isFollowing: boolean, id: number) => void
+    isFollowing: Array<number>
 }
 
 class UsersContainer extends React.Component<UsersContainerType> {

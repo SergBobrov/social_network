@@ -14,8 +14,8 @@ type UsersPropsType = {
     currantPageHandler: (page: number) => void
     follow: (u: number) => void
     unfollow: (u: number) => void
-    toggleIsFollowingAC: (isFollowing: boolean) => void
-    isFollowing: boolean
+    toggleIsFollowingAC: (isFollowing: boolean, id: number) => void
+    isFollowing: Array<number>
 }
 
 export const Users = (props: UsersPropsType) => {
@@ -56,23 +56,23 @@ export const Users = (props: UsersPropsType) => {
                                         </NavLink>
                                     </div>
                                     <div>
-                                        {u.followed ? <button disabled={props.isFollowing} onClick={() => {
-                                                props.toggleIsFollowingAC(true)
+                                        {u.followed ? <button disabled={props.isFollowing.some(t => t===u.id)} onClick={() => {
+                                                props.toggleIsFollowingAC(true, u.id)
                                                 console.log(props.isFollowing);
                                                 usersAPI.deleteUnfollowUser(u.id).then(data => {
                                                     if (data.resultCode === 0) {
                                                         props.unfollow(u.id)
-                                                        props.toggleIsFollowingAC(false)
+                                                        props.toggleIsFollowingAC(false, u.id)
                                                     }
                                                 })
                                             }}>unfollow</button> :
-                                            <button disabled={props.isFollowing} onClick={() => {
-                                                props.toggleIsFollowingAC(true)
+                                            <button disabled={props.isFollowing.some(t => t===u.id)} onClick={() => {
+                                                props.toggleIsFollowingAC(true, u.id)
                                                 usersAPI.postFollowUser(u.id).then(data => {
                                                     if (data.resultCode === 0) {
                                                         props.follow(u.id)
                                                     }
-                                                    props.toggleIsFollowingAC(false)
+                                                    props.toggleIsFollowingAC(false, u.id)
                                                 })
                                             }}>follow</button>}
 
