@@ -14,9 +14,12 @@ type UsersPropsType = {
     currantPageHandler: (page: number) => void
     follow: (u: number) => void
     unfollow: (u: number) => void
+    toggleIsFollowingAC: (isFollowing: boolean) => void
+    isFollowing: boolean
 }
 
 export const Users = (props: UsersPropsType) => {
+
 
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
 
@@ -53,19 +56,23 @@ export const Users = (props: UsersPropsType) => {
                                         </NavLink>
                                     </div>
                                     <div>
-                                        {u.followed ? <button onClick={() => {
-
+                                        {u.followed ? <button disabled={props.isFollowing} onClick={() => {
+                                                props.toggleIsFollowingAC(true)
+                                                console.log(props.isFollowing);
                                                 usersAPI.deleteUnfollowUser(u.id).then(data => {
                                                     if (data.resultCode === 0) {
                                                         props.unfollow(u.id)
+                                                        props.toggleIsFollowingAC(false)
                                                     }
                                                 })
                                             }}>unfollow</button> :
-                                            <button onClick={() => {
+                                            <button disabled={props.isFollowing} onClick={() => {
+                                                props.toggleIsFollowingAC(true)
                                                 usersAPI.postFollowUser(u.id).then(data => {
                                                     if (data.resultCode === 0) {
                                                         props.follow(u.id)
                                                     }
+                                                    props.toggleIsFollowingAC(false)
                                                 })
                                             }}>follow</button>}
 

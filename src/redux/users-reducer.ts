@@ -3,7 +3,8 @@ const UNFOLLOW = 'UNFOLLOW'
 const SET_USER = 'SET_USER'
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
-const TOOGLE_ISFETCHING = 'TOOGLE_ISFEPCHING'
+const TOGGLE_IS_FETCHING = 'TOOGLE_IS_FEPCHING'
+const TOGGLE_IS_FOLLOWING = 'TOOGLE_IS_FOLLOWING'
 
 export const urlAddress = 'https://lh3.googleusercontent.com/proxy/liOZrZH9r1mF-04Um35auGflcj1phyADkSxfCPGIVZ0mxBeV8Bzx-ByGKnrKvKEUfSH5dYGp7MZGOfZjcXObnCeBMnc11RyYW3SdNiMh3mvVyHzs6BwHMNOrJ4QgkZxSImYPR5lGkYIta26IhCGbklo'
 
@@ -13,6 +14,7 @@ export type UsersStateType = {
     totalUsersCount: number,
     currantPage: number,
     isFetching: boolean,
+    followingInProgress: boolean,
 }
 
 
@@ -35,6 +37,7 @@ export type UsersActionsType =
     | ReturnType<typeof setCurrentPageAC>
     | ReturnType<typeof setTotalCountAC>
     | ReturnType<typeof toggleIsFetchingAC>
+    | ReturnType<typeof toggleIsFollowingAC>
 
 let initialState: UsersStateType = {
     users: [],
@@ -42,6 +45,7 @@ let initialState: UsersStateType = {
     totalUsersCount: 0,
     currantPage: 1,
     isFetching: true,
+    followingInProgress: false,
 }
 
 const usersReducer = (state: UsersStateType = initialState, action: UsersActionsType) => {
@@ -77,8 +81,11 @@ const usersReducer = (state: UsersStateType = initialState, action: UsersActions
         case SET_TOTAL_USERS_COUNT:
             return {...state, totalUsersCount: action.totalCount}
 
-        case TOOGLE_ISFETCHING:
+        case TOGGLE_IS_FETCHING:
             return {...state, isFetching: action.isFetching}
+
+        case TOGGLE_IS_FOLLOWING:
+            return {...state, followingInProgress: action.isFollowing}
 
         default:
             return state
@@ -107,7 +114,11 @@ export const setTotalCountAC = (totalCount: number) => {
 }
 
 export const toggleIsFetchingAC = (isFetching: boolean) => {
-    return ({type: TOOGLE_ISFETCHING, isFetching} as const)
+    return ({type: TOGGLE_IS_FETCHING, isFetching} as const)
+}
+
+export const toggleIsFollowingAC = (isFollowing: boolean) => {
+    return ({type: TOGGLE_IS_FOLLOWING, isFollowing} as const)
 }
 
 
