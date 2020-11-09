@@ -1,28 +1,22 @@
 import classes from "./Users.module.css";
 import userPhoto from "../../assets/images/images.jpg";
 import React from "react";
-import {UsersType} from "../../redux/users-reducer";
+import {UsersStateType, UsersType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
 import {usersAPI} from "../../api/api";
 
 
 type UsersPropsType = {
-    users: Array<UsersType>
-    totalUsersCount: number
-    pageSize: number
-    currantPage: number
-    currantPageHandler: (page: number) => void
-    follow: (u: number) => void
-    unfollow: (u: number) => void
-    toggleIsFollowingAC: (isFollowing: boolean, id: number) => void
-    followingInProgress: number[]
-
+    follow: (userId: number) => void
+    unfollow: (userId: number) => void
+    setCurrentPage: (pageNumber: number) => void
+    usersPage: UsersStateType
 }
 
 export const Users = (props: UsersPropsType) => {
 
 
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
+    let pagesCount = Math.ceil(props.usersPage.totalUsersCount / props.usersPage.pageSize)
 
     let pages = []
 
@@ -34,17 +28,22 @@ export const Users = (props: UsersPropsType) => {
         <div>
             <div>
                 <div className={classes.pagination}>
+
+
                     {pages.map((page, index) => {
                         return (
                             <span key={index} onClick={() => {
-                                props.currantPageHandler(page)
+                                props.setCurrentPage(page)
+                                console.log(props.usersPage.currantPage);
                             }}
-                                  className={props.currantPage === page ? classes.selectedPage : 'null'}>{page}</span>
+                                  className={props.usersPage.currantPage === page ? classes.selectedPage : 'null'}>{page}</span>
                         )
                     })}
+
+
                 </div>
                 {
-                    props.users.map((u) => {
+                    props.usersPage.users.map((u) => {
                         return (
 
                             <div key={u.id} className={classes.wrapper}>
@@ -57,16 +56,16 @@ export const Users = (props: UsersPropsType) => {
                                         </NavLink>
                                     </div>
                                     <div>
-                                        {u.followed ? <button disabled={props.followingInProgress.some(t => t === u.id)}
+                                        {u.followed ? <button disabled={props.usersPage.followingInProgress.some(t => t === u.id)}
                                                               onClick={() => {
                                                                   props.unfollow(u.id)
                                                               }
                                                               }>unfollow</button>
                                             :
 
-                                            <button disabled={props.followingInProgress.some(t => t === u.id)}
+                                            <button disabled={props.usersPage.followingInProgress.some(t => t === u.id)}
                                                     onClick={() => {
-                                                        props.unfollow(u.id)
+                                                        props.follow(u.id)
                                                     }}>follow</button>}
 
                                     </div>
