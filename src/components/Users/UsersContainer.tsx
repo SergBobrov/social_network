@@ -2,11 +2,10 @@ import React from "react";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import {
-    followAC,
+    follow,
     getUsers,
     setCurrentPageAC,
-    toggleIsFollowingAC,
-    unfollowAC,
+    toggleIsFollowingAC, unfollow,
     UsersType
 } from "../../redux/users-reducer";
 import {Users} from './Users'
@@ -15,8 +14,8 @@ import {Preloader} from "../../assets/preloader/Preloader";
 
 type UsersContainerType = {
     users: Array<UsersType>
-    followAC: (u: number) => void
-    unfollowAC: (u: number) => void
+    follow: (u: number) => void
+    unfollow: (u: number) => void
     pageSize: number
     totalUsersCount: number
     currantPage: number
@@ -47,8 +46,8 @@ class UsersContainer extends React.Component<UsersContainerType> {
                     pageSize={this.props.pageSize}
                     currantPage={this.props.currantPage}
                     currantPageHandler={this.currantPageHandler}
-                    follow={this.props.followAC}
-                    unfollow={this.props.unfollowAC}
+                    follow={this.props.follow}
+                    unfollow={this.props.unfollow}
                     toggleIsFollowingAC={this.props.toggleIsFollowingAC}
                     followingInProgress={this.props.followingInProgress}
                 />
@@ -93,8 +92,8 @@ const mapStateToProps = (state: AppStateType) => {
 
 export default connect(mapStateToProps, {
     setCurrentPageAC,
-    unfollowAC,
-    followAC,
+    unfollow,
+    follow,
     toggleIsFollowingAC,
     getUsers
 })(UsersContainer)

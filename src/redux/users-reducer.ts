@@ -33,8 +33,8 @@ export type UsersType = {
 }
 
 export type UsersActionsType =
-    ReturnType<typeof followAC>
-    | ReturnType<typeof unfollowAC>
+    ReturnType<typeof followSuccess>
+    | ReturnType<typeof unfollowSuccess>
     | ReturnType<typeof setUserAC>
     | ReturnType<typeof setCurrentPageAC>
     | ReturnType<typeof setTotalCountAC>
@@ -100,11 +100,11 @@ const usersReducer = (state: UsersStateType = initialState, action: UsersActions
 }
 
 
-export const followAC = (userId: number) => {
+export const followSuccess = (userId: number) => {
     return ({type: FOLLOW, userId} as const)
 };
 
-export const unfollowAC = (userId: number) => {
+export const unfollowSuccess = (userId: number) => {
     return ({type: UNFOLLOW, userId} as const)
 };
 
@@ -142,6 +142,31 @@ export const getUsers = (currantPage: number, pageSize: number) => {
         })
     }
 }
+
+export const follow = (id: number) => {
+    return ( dispatch: (action: UsersActionsType) => void) => {
+        dispatch(toggleIsFollowingAC(true, id))
+        usersAPI.deleteUnfollowUser(id).then(data => {
+            if (data.resultCode === 0) {
+                dispatch(unfollowSuccess(id))
+                dispatch(toggleIsFollowingAC(false, id))
+            }
+    })
+}}
+
+export const unfollow = (id: number) => {
+    return ( dispatch: (action: UsersActionsType) => void) => {
+        dispatch(toggleIsFollowingAC(true, id))
+        usersAPI.deleteUnfollowUser(id).then(data => {
+            if (data.resultCode === 0) {
+                dispatch(followSuccess(id))
+                dispatch(toggleIsFollowingAC(false, id))
+            }
+        })
+    }}
+
+
+
 
 
 export default usersReducer;
