@@ -3,52 +3,38 @@ import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import {
     followAC,
-    setCurrentPageAC, setTotalCountAC,
-    setUserAC, toggleIsFetchingAC, toggleIsFollowingAC,
+    getUsers,
+    setCurrentPageAC,
+    toggleIsFollowingAC,
     unfollowAC,
     UsersType
 } from "../../redux/users-reducer";
 import {Users} from './Users'
 import {Preloader} from "../../assets/preloader/Preloader";
-import {usersAPI} from "../../api/api";
 
 
 type UsersContainerType = {
     users: Array<UsersType>
     followAC: (u: number) => void
     unfollowAC: (u: number) => void
-    setUserAC: (u: Array<UsersType>) => void
     pageSize: number
     totalUsersCount: number
     currantPage: number
     setCurrentPageAC: (page: number) => void
-    setTotalCountAC: (userCount: number) => void
     isFetching: boolean
-    toggleIsFetchingAC: (isFetching: boolean) => void
     toggleIsFollowingAC: (isFollowing: boolean, id: number) => void
     followingInProgress: number[]
+    getUsers: (currantPage: number, pageSize: number) => void
 }
 
 class UsersContainer extends React.Component<UsersContainerType> {
 
     componentDidMount() {
-        this.props.toggleIsFetchingAC(true)
-
-        usersAPI.getUsers(this.props.currantPage, this.props.pageSize).then(data => {
-            this.props.toggleIsFetchingAC(false)
-            this.props.setUserAC(data.items)
-            this.props.setTotalCountAC(data.totalCount)
-        })
+        this.props.getUsers(this.props.currantPage, this.props.pageSize)
     }
 
     currantPageHandler = (pageNumber: number) => {
-        this.props.toggleIsFetchingAC(true)
-        this.props.setCurrentPageAC(pageNumber)
-
-        usersAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
-            this.props.toggleIsFetchingAC(false)
-            this.props.setUserAC(data.items)
-        })
+        this.props.getUsers(pageNumber, this.props.pageSize)
     }
 
     render() {
@@ -106,13 +92,11 @@ const mapStateToProps = (state: AppStateType) => {
 // }
 
 export default connect(mapStateToProps, {
-    toggleIsFetchingAC,
-    setTotalCountAC,
     setCurrentPageAC,
-    setUserAC,
     unfollowAC,
     followAC,
-    toggleIsFollowingAC
+    toggleIsFollowingAC,
+    getUsers
 })(UsersContainer)
 
 

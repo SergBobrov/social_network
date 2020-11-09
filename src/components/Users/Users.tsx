@@ -16,6 +16,7 @@ type UsersPropsType = {
     unfollow: (u: number) => void
     toggleIsFollowingAC: (isFollowing: boolean, id: number) => void
     followingInProgress: number[]
+
 }
 
 export const Users = (props: UsersPropsType) => {

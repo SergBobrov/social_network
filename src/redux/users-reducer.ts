@@ -1,3 +1,5 @@
+import {usersAPI} from "../api/api";
+
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USER = 'SET_USER'
@@ -48,7 +50,7 @@ let initialState: UsersStateType = {
     followingInProgress: []
 }
 
-const usersReducer = (state: UsersStateType = initialState, action: UsersActionsType) => {
+const usersReducer = (state: UsersStateType = initialState, action: UsersActionsType): UsersStateType => {
 
     switch (action.type) {
         case FOLLOW:
@@ -85,8 +87,8 @@ const usersReducer = (state: UsersStateType = initialState, action: UsersActions
             return {...state, isFetching: action.isFetching}
 
         case TOGGLE_IS_FOLLOWING:
-            debugger
-            return {...state,
+            return {
+                ...state,
                 followingInProgress: action.isFollowing ? [...state.followingInProgress, action.id]
                     : []
                 // state.followingInProgress.filter((id) => id !== action.id)
@@ -123,9 +125,22 @@ export const toggleIsFetchingAC = (isFetching: boolean) => {
 }
 
 export const toggleIsFollowingAC = (isFollowing: boolean, id: number) => {
-    return ({type: TOGGLE_IS_FOLLOWING,
+    return ({
+        type: TOGGLE_IS_FOLLOWING,
         isFollowing: isFollowing,
-        id: id} as const)
+        id: id
+    } as const)
+}
+
+export const getUsers = (currantPage: number, pageSize: number) => {
+    return (dispatch: (action: UsersActionsType) => void) => {
+        dispatch(toggleIsFetchingAC(true))
+        usersAPI.getUsers(currantPage, pageSize).then(data => {
+            dispatch(toggleIsFetchingAC(false))
+            dispatch(setUserAC(data.items))
+            dispatch(setTotalCountAC(data.totalCount))
+        })
+    }
 }
 
 
