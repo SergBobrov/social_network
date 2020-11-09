@@ -5,6 +5,21 @@
 
 .wrapper {
     width: 70px;
-    border: 1px solid black;
     margin: 10px
+}
+
+.selectedPage {
+    font-weight: bold;
+
+}
+
+span {
+    font-size: 20px;
+    padding-left: 5px;
+    color:navy;
+}
+
+.pagination {
+    display: flex;
+    flex-wrap: wrap;;
 }

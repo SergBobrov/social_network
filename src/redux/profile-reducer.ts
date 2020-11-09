@@ -1,7 +1,6 @@
-import {ActionsType} from "./redux-store";
-
 export const UPDATE_NEW_POST_TEXT = "UPDATE_NEW_POST_TEXT"
 export const ADD_POST = "ADD-POST"
+export const SET_USER_PROFILE = "SET_USER_PROFILE"
 
 type postsDataType = {
     id: number
@@ -12,14 +11,41 @@ type postsDataType = {
 export type profilePageType = {
     postsData: Array<postsDataType>
     newPostText: string
+    profile: profileType | null
 }
 
-let initialState = {
+export type profileType = {
+    "aboutMe": string
+    "contacts": {
+        "facebook": null | string
+        "website": null | string
+        "vk": null | string
+        "twitter": null | string
+        "instagram": null | string
+        "youtube": null | string
+        "github": null | string
+        "mainLink": null | string
+    }
+    "lookingForAJob": boolean
+    "lookingForAJobDescription": null | string
+    "fullName": string
+    "userId": number
+    "photos": {
+        "small": null | string
+        "large": null | string
+    }
+}
+
+
+
+let initialState: profilePageType = {
     postsData: [
         {id: 1, text: "Hi, how a u?", likeCount: 15},
         {id: 2, text: "Its my first post", likeCount: 10}
     ],
-    newPostText: ""
+    newPostText: "",
+
+    profile: null as profileType | null
 }
 
 
@@ -35,10 +61,17 @@ export const addPostActionCreator = () => {
     )
 };
 
+export const setUserProfile = (profile: profileType) => {
+    return (
+        {type: SET_USER_PROFILE, profile} as const
+    )
+};
+
+type ActionsType = ReturnType<typeof UpdateNewPostTextActionCreator> |
+    ReturnType<typeof addPostActionCreator> |
+    ReturnType<typeof setUserProfile>
 
 const profileReducer = (state: profilePageType = initialState, action: ActionsType) => {
-
-
     switch (action.type) {
         case ADD_POST:
             return {
@@ -49,9 +82,13 @@ const profileReducer = (state: profilePageType = initialState, action: ActionsTy
             }
         case UPDATE_NEW_POST_TEXT:
             return {...state, newPostText: action.newPostText}
-    }
 
-    return state
+        case SET_USER_PROFILE:
+            return {...state, profile: action.profile}
+
+        default:
+            return state
+    }
 }
 
 export default profileReducer;
