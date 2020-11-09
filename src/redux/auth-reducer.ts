@@ -1,3 +1,7 @@
+import {headerAPI} from "../api/api";
+import {ThunkAction, ThunkDispatch} from "redux-thunk";
+import {AppStateType} from "./redux-store";
+
 const SET_USER_DATA = 'SET_USER_DATA'
 
 
@@ -43,5 +47,22 @@ export const setAuthUserData = (data: AuthStateType) => {
         }
     } as const)
 };
+
+type ThunkType = ThunkAction<void, AppStateType, unknown, AuthActionsType>
+
+type DispatchType = ThunkDispatch<AppStateType, unknown, AuthActionsType>
+
+
+export const AuthThunks = {
+    getAuthData: (): ThunkType => {
+        return (dispatch: DispatchType) => {
+            headerAPI.getAuthData().then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(setAuthUserData(data.data))
+                }
+            })
+        }
+    }
+}
 
 

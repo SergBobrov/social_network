@@ -37,6 +37,8 @@ export const profileAPI = {
     },
 }
 
+
+
 export const headerAPI = {
     getAuthData() {
         return (axiosInstance.get(`https://social-network.samuraijs.com/api/1.0/auth/me`)).then(resp => resp.data)

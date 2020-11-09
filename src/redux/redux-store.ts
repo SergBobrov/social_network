@@ -1,5 +1,5 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
-import profileReducer, {addPostActionCreator, UpdateNewPostTextActionCreator} from "./profile-reducer";
+import {addPostActionCreator, profileReducer, UpdateNewPostTextActionCreator} from "./profile-reducer";
 import dialogsReducer, {SendMessageActionCreator, UpdateNewMessageBodyActionCreator} from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
 import usersReducer from "./users-reducer";

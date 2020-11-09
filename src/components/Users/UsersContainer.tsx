@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
-import {thunks, UsersStateType, UsersType} from "../../redux/users-reducer";
+import {usersThunks, UsersStateType, UsersType} from "../../redux/users-reducer";
 import {Users} from './Users'
 import {Preloader} from "../../assets/preloader/Preloader";
 
@@ -59,7 +59,7 @@ const mapStateToProps = (state: AppStateType) => {
     }
 }
 
-const {getUsers, getCurrentPage, follow, unfollow} = thunks
+const {getUsers, getCurrentPage, follow, unfollow} = usersThunks
 
 export default connect(mapStateToProps, {
     getUsers, getCurrentPage, follow, unfollow
